@@ -39,7 +39,7 @@ gem 'font-awesome-rails'
 gem 'letter_opener', group: :development
 gem 'aasm'
 gem 'figaro'
-gem 'fog'
+gem 'fog-aws'
 gem 'airbrake', '~> 5.4'
 
 group :development, :test do
