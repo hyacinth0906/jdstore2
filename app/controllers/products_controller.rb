@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @photos = @product.photos.all
+    @photos = @product.image
   end
 
   def add_to_cart
@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
      else
        flash[:warning] = "你的购物车内已有此物品"
      end
-     
+
        redirect_to :back
   end
 end
