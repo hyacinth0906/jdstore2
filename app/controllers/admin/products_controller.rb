@@ -18,11 +18,11 @@ class Admin::ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      if params[:photos] != nil
-         params[:photos]['avatar'].each do |a|
-          @photo = @product.photos.create(:avatar => a)
-        end
-      end
+      #if params[:photos] != nil
+         #params[:photos]['avatar'].each do |a|
+          #@photo = @product.photos.create(:avatar => a)
+        #end
+      #end
       redirect_to admin_products_path
     else
       render :new
@@ -36,14 +36,14 @@ class Admin::ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
 
-    if params[:photos] != nil
-      @product.photos.destroy_all #nedd to destory old pics first
+    #if params[:photos] != nil
+      #@product.photos.destroy_all #nedd to destory old pics first
 
-      params[:photos]['avatar'].each do |a|
-        @picture = @product.photos.create(:avatar => a)
-      end
+      #params[:photos]['avatar'].each do |a|
+        #@picture = @product.photos.create(:avatar => a)
+      #end
 
-      @product.update(product_params)
+   if @product.update(product_params)
       redirect_to admin_products_path
     else
       render :edit
