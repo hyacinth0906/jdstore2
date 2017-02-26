@@ -50,6 +50,12 @@ class Admin::ProductsController < ApplicationController
     end
   end
 
+  def delete
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to admin_products_path, alert: 'product deleted'
+  end
+
   private
 
    def product_params
