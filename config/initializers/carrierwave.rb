@@ -5,7 +5,7 @@ require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
   if Rails.env.production?
-    config.storage :fog
+
     config.fog_provider = 'fog'
 
     config.fog_credentials = {
@@ -14,9 +14,10 @@ CarrierWave.configure do |config|
 
       aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
 
-      region:                ENV["AWS_REGION"]
+      region:                'ap-northeast-1'
 
     }
+    config.storage :fog
     config.fog_directory  = ENV["AWS_BUCKET_NAME"]
 
 
