@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
+  
   def admin_required
     if !current_user.admin?
       redirect_to "/", alert: "You are not admin."
@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     def current_cart
       @current_cart ||= find_cart
     end
+
 
     private
 

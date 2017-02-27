@@ -20,6 +20,21 @@
              <%= link_to("联系我们", "#") %>
            </li>
          </ul>
+
+               <div class="pull-right searchform">
+                     <%= form_tag search_products_path , :method => :get  do %>
+                      <div class="input-group" id="search-id" >
+                        <input type="text" class="form-control" name="q" value="<%= params[:q] %>" placeholder="输入商品关键词，全球商品淘淘乐！">
+                        <div class="input-group-btn">
+                          <button class="btn btn-default" type="submit">
+                            搜索
+                          </button>
+                        </div>
+                      </div>
+                  <% end %>
+               </div>
+
+
            <ul class="nav navbar-nav navbar-right">
               <li>
                  <%= link_to carts_path do  %>
