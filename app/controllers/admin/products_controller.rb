@@ -11,6 +11,7 @@ class Admin::ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @categories = Category.all.map { |c| [c.name, c.id] }
     @photo = @product.photos.build #for multi-pics
   end
 
@@ -18,11 +19,11 @@ class Admin::ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      #if params[:photos] != nil
-         #params[:photos]['avatar'].each do |a|
-          #@photo = @product.photos.create(:avatar => a)
-        #end
-      #end
+      if params[:photos] != nil
+         params[:photos]['avatar'].each do |a|
+          @photo = @product.photos.create(:avatar => a)
+        end
+      end
       redirect_to admin_products_path
     else
       render :new
@@ -31,19 +32,24 @@ class Admin::ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+    @categories = Category.all.map { |c| [c.name, c.id] }
   end
 
   def update
     @product = Product.find(params[:id])
+    @product.category_id = params[:category_id]
 
-    #if params[:photos] != nil
-      #@product.photos.destroy_all #nedd to destory old pics first
+    if params[:photos] != nil
+      @product.photos.destroy_all #nedd to destory old pics first
 
-      #params[:photos]['avatar'].each do |a|
-        #@picture = @product.photos.create(:avatar => a)
-      #end
+      params[:photos]['avatar'].each do |a|
+        @picture = @product.photos.create(:avatar => a)
+      end
 
-   if @product.update(product_params)
+      @product.update(product_params)
+      redirect_to admin_products_path
+
+    elsif @product.update(product_params)
       redirect_to admin_products_path
     else
       render :edit
@@ -59,6 +65,6 @@ class Admin::ProductsController < ApplicationController
   private
 
    def product_params
-     params.require(:product).permit(:title, :description, :quantity, :price, :image)
+     params.require(:product).permit(:title, :description, :quantity, :price, :image, :image2, :image3, :category_id)
    end
 end
